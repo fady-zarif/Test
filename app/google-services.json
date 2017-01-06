@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "730072451461",
+    "firebase_url": "https://driver-app-b6825.firebaseio.com",
+    "project_id": "driver-app-b6825",
+    "storage_bucket": "driver-app-b6825.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730072451461:android:f51dc1fd876b03b2",
+        "android_client_info": {
+          "package_name": "com.tromke.mydrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730072451461-44oae83uhqbbturalede905vhonj08ad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tromke.mydrive",
+            "certificate_hash": "C1DB595AE302BAD1E78C09A0F9086CF30F8760A4"
+          }
+        },
+        {
+          "client_id": "730072451461-1lnnfdfjed6are8vd40do6lom9bfk83g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTTnikq7tmPDu9x5NlCR4EMq1SGR-tjBs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730072451461-1lnnfdfjed6are8vd40do6lom9bfk83g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

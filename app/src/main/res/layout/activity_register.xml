@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_username"
+        android:drawableStart="@drawable/ic_username"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingTop="10pt"
+        android:hint="Email Addrs"
+        >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_pwd"
+        android:drawableStart="@drawable/ic_pwd"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:paddingTop="10pt"
+        android:hint="Password" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/cfmpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_pwd"
+        android:drawableStart="@drawable/ic_pwd"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:paddingTop="10pt"
+        android:hint="Confirm Password" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/mobile_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_call"
+        android:drawableStart="@drawable/ic_call"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:inputType="number"
+        android:paddingTop="10pt"
+        android:hint="Contact" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/addrs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_location_on"
+        android:drawableStart="@drawable/ic_location_on"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:paddingTop="10pt"
+        android:hint="Address" >
+    </EditText>
+
+    <Button
+        android:id="@+id/sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_marginTop="50dp"
+        android:padding="8dp"
+        android:onClick="signIn"
+        android:textColor="@color/white_text_color"
+        android:background="@color/active_color"
+        android:text="@string/sign_up" >
+    </Button>
+
+</LinearLayout>

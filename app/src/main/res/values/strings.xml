@@ -1,0 +1,89 @@
+<resources>
+    <string name="parse_app_id">9jmo7iQvHaOETLW3a1bABEtverssotdOa85CFCBn</string>
+    <string name="parse_client_key">ByN2eoTazkJea3wj9q8i8kbrO98SHbyE0tyqMib7</string>
+    <string name="customer_id">Pola driver</string>
+
+    <string name="app_name">Pola Driver</string>
+    <string name="intro_name">Pola</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="latitude_label">Latitude: </string>
+    <string name="longitude_label">Longitude: </string>
+
+    <string name="start_updates">Start updates</string>
+    <string name="stop_updates">Stop updates</string>
+
+    <string name="last_update_time_label">Last location update time: </string>
+
+    <string name="location_updated_message">Location updated</string>
+    <string name="prompt_name">User Name</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign In</string>
+    <string name="error_field_required">required</string>
+    <string name="error_invalid_password">invalid password</string>
+    <string name="action_register_short">Register</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="action_logout">Logout</string>
+    <string name="no_internet">No network connection</string>
+    <string name="location_update_failed">Location updated failed</string>
+    <!-- DOCUMENT NAMES -->
+    <string name="doc_name_select">Select a document</string>
+    <string name="doc_name_yourpic">Your Photo</string>
+    <string name="doc_name_driving_licence">Driving Licence</string>
+    <string name="doc_name_taxi_pic">Tax Receipt</string>
+    <string name="doc_name_rc_pic">RC Card Photo</string>
+    <string name="doc_name_insurance_pic">Insurance Photo</string>
+    <!-- REGISTRATION SCREEN -->
+    <string name="reg_hint_name">Name</string>
+    <string name="reg_hint_phone">Phone</string>
+    <string name="reg_btn_register">Register</string>
+    <!-- REGISTRATION SCREEN -->
+
+    <string name="noImageSelected">No image selected</string>
+
+    <string name="txt_loading">Loading</string>
+    <string name="txt_reg_failure">Registration Failure</string>
+    <string name="txt_upload">SEND</string>
+    <string name="login_failure">Login Failure</string>
+
+    <string name="txt_press_back_to_exit">Press back again to exit</string>
+    <string name="os_type">Android</string>
+
+    <!-- CONNECTIVITY MESSAGES -->
+    <string name="conn_noconnectivity">No Connectivity</string>
+    <string name="register_successfully">Thank you :) Your documents are successfully uploaded. You will receive your login details shorty upon approval.</string>
+    <!-- REGSIGN SCREEN -->
+    <string name="regsignin_register">Register</string>
+    <string name="regsignin_signin">LogIn</string>
+
+    <!--loading msg -->
+    <string name="start_trip">Starting trip....</string>
+    <string name="stop_trip">Stoping trip....</string>
+    <string name="offline_text">Go Online</string>
+    <string name="action_shift">Shift</string>
+    <string name="stop_shift">Go Offline</string>
+    <string name="action_trips">Trips</string>
+    <string name="online_msg">You are online now..\n\n Get ready for your trips.</string>
+    <string name="offline_msg">You are offline now..\n\n Click on \'Go Online\' to get new trips.</string>
+    <string name="please_wait">Please Wait..!</string>
+    <string name="login">Login</string>
+    <string name="register">Register.</string>
+    <string name="old_user">Already a registered driver.? Login In</string>
+    <string name="authenticating_driver">Authenticating Driver..</string>
+    <string name="default_info_title">Default Location</string>
+    <string name="default_info_snippet">No places found, because location permission is disabled.</string>
+    <string name="google_maps_key">AIzaSyDH9clAahgFbrlGkEEqK8xNnqYnUIeuEiY</string>
+    <string name="select_image">Select image</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="nav_drawer_items">
+        <item>About</item>
+        <item>Profile</item>
+        <item>Log out</item>
+    </string-array>
+    <string name="title_activity_shift_on_off2">ShiftOnOffActivity2</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>
