@@ -1,11 +1,11 @@
 package com.tromke.mydrive;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.multidex.MultiDexApplication;
 
 import com.firebase.client.Firebase;
 
@@ -13,7 +13,7 @@ import com.firebase.client.Firebase;
 /**
  * Created by satyam on 23/07/15.
  */
-public class ParseApplication extends Application {
+public class ParseApplication extends MultiDexApplication {
 
     public static String PACKAGE_NAME;
     private static ParseApplication mInstance;

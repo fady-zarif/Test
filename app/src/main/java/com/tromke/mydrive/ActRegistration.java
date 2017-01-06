@@ -90,7 +90,6 @@ public class ActRegistration extends AppCompatActivity implements IntRegistratio
         updates.put("taxPaidImage", "");
         updates.put("insuranceImage", "");
         updates.put("timestamp", ServerValue.TIMESTAMP);
-        updates.put("customerId",getResources().getString(R.string.customer_id));
         ref.updateChildren(driverObject, new Firebase.CompletionListener() {
             @Override
             public void onComplete(FirebaseError firebaseError, Firebase firebase) {

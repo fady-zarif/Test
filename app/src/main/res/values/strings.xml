@@ -1,7 +1,6 @@
 <resources>
     <string name="parse_app_id">9jmo7iQvHaOETLW3a1bABEtverssotdOa85CFCBn</string>
     <string name="parse_client_key">ByN2eoTazkJea3wj9q8i8kbrO98SHbyE0tyqMib7</string>
-    <string name="customer_id">Pola driver</string>
 
     <string name="app_name">Pola Driver</string>
     <string name="intro_name">Pola</string>
@@ -74,15 +73,7 @@
     <string name="default_info_snippet">No places found, because location permission is disabled.</string>
     <string name="google_maps_key">AIzaSyDH9clAahgFbrlGkEEqK8xNnqYnUIeuEiY</string>
     <string name="select_image">Select image</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="nav_drawer_items">
-        <item>About</item>
-        <item>Profile</item>
-        <item>Log out</item>
-    </string-array>
-    <string name="title_activity_shift_on_off2">ShiftOnOffActivity2</string>
+    <string name="title_activity_shift_on_off2">shift_on_off2</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

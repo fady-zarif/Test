@@ -11,14 +11,20 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +47,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 import com.tromke.mydrive.Constants.ConstantsSharedPreferences;
+import com.tromke.mydrive.Models.DriverData;
 import com.tromke.mydrive.util.ConnectionManager;
 
 import java.util.Calendar;
@@ -53,7 +66,8 @@ import io.hypertrack.lib.transmitter.model.HTShiftParamsBuilder;
 import io.hypertrack.lib.transmitter.model.callback.HTShiftStatusCallback;
 import io.hypertrack.lib.transmitter.service.HTTransmitterService;
 
-public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCheckedChangeListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class ShiftOnOffAct extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, Switch.OnCheckedChangeListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
@@ -61,9 +75,10 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
     private Boolean isShiftStarted = false;
     private String hyperTrackId;
     private FirebaseAuth mAuth;
+    DriverData data;
     private ProgressDialog loadingProgress;
     Calendar calendar;
-
+    public TextView DriverMail;
     private GoogleMap mMap;
     private CameraPosition mCameraPosition;
 
@@ -96,11 +111,15 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shift_on_off2);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+
         if (savedInstanceState != null) {
             mCurrentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
-        setContentView(R.layout.activity_shift_on_off);
 
         buildGoogleApiClient();
         mGoogleApiClient.connect();
@@ -113,13 +132,32 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
 
         mAuth = FirebaseAuth.getInstance();
 
-        loadingProgress = new ProgressDialog(ShiftOnOffActivity.this,
+        loadingProgress = new ProgressDialog(ShiftOnOffAct.this,
                 ProgressDialog.THEME_HOLO_LIGHT);
         loadingProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         loadingProgress.setTitle(getResources().getString(R.string.app_name));
 
         loadingProgress.setCancelable(false);
 
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -151,6 +189,7 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_shift, menu);
         MenuItem toggleService = menu.findItem(R.id.action_status);
         Switch actionStatus = (Switch) toggleService.getActionView();
@@ -163,6 +202,7 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
         }
         actionStatus.setOnCheckedChangeListener(this);
         return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override
@@ -172,7 +212,7 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
                 if (ConnectionManager.getInstance(getApplicationContext()).isDeviceConnectedToInternet()) {
                     mAuth.signOut();
 
-                    Intent intent = new Intent(ShiftOnOffActivity.this, ActRegistration.class);
+                    Intent intent = new Intent(ShiftOnOffAct.this, ActRegistration.class);
                     startActivity(intent);
                     finish();
                 } else {
@@ -181,7 +221,7 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
                 }
                 return true;
             case R.id.action_trip:
-                Intent intent = new Intent(ShiftOnOffActivity.this, TripsActivity.class);
+                Intent intent = new Intent(ShiftOnOffAct.this, TripsActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -198,7 +238,7 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
 
     public void showGpsAlert() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                ShiftOnOffActivity.this);
+                ShiftOnOffAct.this);
 
         // set title
         alertDialogBuilder.setTitle("Pola Driver");
@@ -278,7 +318,6 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
         }
         isShiftStarted = !isShiftStarted;
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -380,6 +419,57 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
                 .addApi(Places.PLACE_DETECTION_API)
                 .build();
         createLocationRequest();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Driver_data();
+    }
+
+    public void Driver_data() {
+
+        String Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("drivers");
+        com.google.firebase.database.Query query = reference.orderByChild("UUID").equalTo(Uid);
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                data = dataSnapshot.getValue(DriverData.class);
+                try {
+                    Picasso.with(getApplicationContext()).load(data.getProfileImage()).resize(150, 150).placeholder(R.drawable.profile)
+                            .into((ImageView) findViewById(R.id.profile_image));
+                } catch (Exception ex) {
+
+                    Log.e("Error", ex.toString());
+                }
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     /**
@@ -536,5 +626,36 @@ public class ShiftOnOffActivity extends AppCompatActivity implements Switch.OnCh
         } else {
             Toast.makeText(getApplicationContext(), getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.profile) {
+            if (data != null) {
+                Intent intent = new Intent(ShiftOnOffAct.this, Driver_Profile.class);
+                intent.putExtra("driver_profile", data);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Check Network Please", Toast.LENGTH_SHORT).show();
+                onStart();
+            }
+        } else if (id == R.id.Documents) {
+            if (data != null) {
+                Intent intent = new Intent(ShiftOnOffAct.this, Driver_Documents.class);
+                intent.putExtra("driver_profile", data);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Check your Network Please", Toast.LENGTH_SHORT).show();
+                onStart();
+            }
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

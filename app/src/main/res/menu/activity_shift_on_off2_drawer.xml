@@ -8,15 +8,15 @@
             android:icon="@drawable/profile2"
             android:title="Profile" />
     </group>
-    <group
-        android:id="@+id/group2"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/Documents"
-            android:icon="@drawable/docs"
-            android:title="Documents" />
+        <group
+            android:id="@+id/group2"
+            android:checkableBehavior="single">
+            <item
+                android:id="@+id/Documents"
+                android:icon="@drawable/docs"
+                android:title="Documents" />
 
-    </group>
+         </group>
 
 
 

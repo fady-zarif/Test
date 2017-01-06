@@ -22,7 +22,7 @@ public class ActSplash extends AppCompatActivity {
         }
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(ActSplash.this, ShiftOnOffActivity.class));
+            startActivity(new Intent(ActSplash.this, ShiftOnOffAct.class));
             finish();
         } else {
             startActivity(new Intent(ActSplash.this,ActRegistration.class));

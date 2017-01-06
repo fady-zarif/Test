@@ -65,7 +65,7 @@ public class ActLogin extends AppCompatActivity implements IntLoginView {
         }
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(ActLogin.this, ShiftOnOffActivity.class));
+            startActivity(new Intent(ActLogin.this, ShiftOnOffAct.class));
             finish();
         }
         setContentView(R.layout.act_login);
@@ -165,6 +165,7 @@ public class ActLogin extends AppCompatActivity implements IntLoginView {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChild) {
                 if (dataSnapshot.exists()) {
+
                     Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
                     String driverId = String.valueOf(value.get("UUID"));
                     String hypertrack_id = String.valueOf(value.get("hypertrack_id"));
@@ -172,7 +173,7 @@ public class ActLogin extends AppCompatActivity implements IntLoginView {
                         ParseApplication.getSharedPreferences().edit().putString(ConstantsSharedPreferences.HYPERTRACK_ID, hypertrack_id).commit();
                         getDriverIdDialog.dismiss();
 
-                        Intent intent = new Intent(ActLogin.this, ShiftOnOffActivity.class);
+                        Intent intent = new Intent(ActLogin.this, ShiftOnOffAct.class);
                         startActivity(intent);
                         finish();
                     } else {
